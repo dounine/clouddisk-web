@@ -1,0 +1,9 @@
+**/.idea/
+/node_modules/
+/bower_components/
+**/.DS_Store
+.DS_Store
+**/target/
+**/*.iml
+**/rebel.xml
+modules/dnn-web/src/main/webapp/public/js/lib/

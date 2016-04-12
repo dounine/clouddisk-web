@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.dounine</groupId>
+	<artifactId>clouddisk-web</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1</version>
+	<description>clouddisk-web页面测试项目</description>
+    <url>https://github.com/dounine/clouddisk-web</url>
+    <inceptionYear>2016-04-12</inceptionYear>
+
+	<name>clouddisk-web</name>
+
+	<properties>
+	  	<argLine>-Dfile.encoding=UTF-8</argLine>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
+		<junit.version>4.12</junit.version>
+		<javax.servlet.version>3.1.0</javax.servlet.version>
+		<jackson.version>2.5.3</jackson.version>
+		<commons-fileupload.version>1.3.1</commons-fileupload.version>
+		<commons.version>3.4</commons.version>
+		<slf4j.version>1.7.16</slf4j.version>
+		<fastjson.version>1.2.8</fastjson.version>
+		<clouddisk.version>1.1.2</clouddisk.version>
+	  </properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.dounine</groupId>
+			<artifactId>clouddisk</artifactId>
+			<version>${clouddisk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm-commons</artifactId>
+			<version>5.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- 编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- 编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+			  <groupId>org.zeroturnaround</groupId>
+			  <artifactId>jrebel-maven-plugin</artifactId>
+			  <configuration>
+			  	<packaging>war</packaging>
+			  	<classpath>
+			      <fallback>default</fallback>
+			      <resources>
+			        <resource>
+			          <directory>target/classes</directory>
+			          <includes>
+			            <include>dnn/**</include>
+			            <include>common/**</include>
+			          </includes>
+			        </resource>
+			      </resources>
+			    </classpath>
+			    <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+			    <alwaysGenerate>true</alwaysGenerate>
+			  </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<httpConnector>
+			          <port>8080</port>
+			        </httpConnector>
+			        <stopKey>shutdown</stopKey>
+			        <stopPort>9966</stopPort>
+					<reload>manual</reload><!-- 在控制台按Enter键可重新部署 -->
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/${project.artifactId}</contextPath>
+					</webApp>
+					<requestLog implementation="org.eclipse.jetty.server.NCSARequestLog">
+						<filename>target/访问请求记录-yyyy_mm_dd.log</filename><!-- 日志文件名称 -->
+						<filenameDateFormat>yyyy_MM_dd</filenameDateFormat><!-- 日志名称日期格式化方式 -->
+						<logDateFormat>yyyy-MM-dd HH:mm:ss</logDateFormat><!-- 日志内容日期格式化方式 -->
+						<logTimeZone>GMT+8:00</logTimeZone><!-- 时区 -->
+						<append>true</append><!-- 追加到日志 -->
+						<logServer>true</logServer><!-- 记录访问的主机名 -->
+						<retainDays>1</retainDays><!-- 日志文件保存的天数, 超过删除 -->
+						<logCookies>true</logCookies><!-- 记录 cookies -->
+					</requestLog>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

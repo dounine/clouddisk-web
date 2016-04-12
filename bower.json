@@ -1,0 +1,36 @@
+{
+  "name": "dnn-web",
+  "description": "",
+  "main": "",
+  "authors": [
+    "huanghuanlai <102535481@qq.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "dounine.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "4.0.0-alpha",
+    "angular": "^1.5.3",
+    "echarts": "^3.1.5",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "requirejs": "^2.2.0",
+    "angular-loading-bar": "^0.9.0",
+    "angular-cookies": "^1.5.3",
+    "require-css": "^0.1.8",
+    "angular-animate": "^1.5.3",
+    "tether": "^1.2.0"
+  },
+  "devDependencies": {
+    "angular-file-upload": "^2.2.0"
+  }
+}
