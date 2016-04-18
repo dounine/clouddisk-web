@@ -41,6 +41,7 @@
         position: relative;
         text-align: center;
         img {
+
           display: inline-block;
           vertical-align: middle;
           height: auto;
@@ -83,7 +84,16 @@
     cursor: pointer;
   }
 }
-
+@keyframes fade-in {
+  0% {opacity: 0;}/*初始状态 透明度为0*/
+  40% {opacity: 0;}/*过渡状态 透明度为0*/
+  100% {opacity: 1;}/*结束状态 透明度为1*/
+}
+@-webkit-keyframes fade-in {/*针对webkit内核*/
+  0% {opacity: 0;}
+  40% {opacity: 0;}
+  100% {opacity: 1;}
+}
 .clearfix:before, .clearfix:after {
   content: "";
   display: table;

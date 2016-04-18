@@ -21,7 +21,7 @@ define(['angular',"app/cddService"], function(angular) {
         var vm = $scope;
         vm.clear = function () {
             cddCheckService.clear_request().success(function (data, status, conf) {
-                $("#exampleModal").modal('show');
+                $("#exampleModal").modal("show");
             });
         }
     }
@@ -34,7 +34,6 @@ define(['angular',"app/cddService"], function(angular) {
         inits();
         function inits() {
             cddSearchData.search = true;
-
             vm.navs = [{
                 path: "/",
                 oriName: "所有文件"
@@ -116,12 +115,13 @@ define(['angular',"app/cddService"], function(angular) {
             vm.disSubmit = true;
             cddCaptchaService.captcha_request(postData).success(function (data, status) {
                 if (data.success) {
-                    vm.disSubmit = false;
                     $("#exampleModal").modal("hide");//隐藏输入验证码对话框
-                    $rootScope.$state.go("fileList", null, {
-                        path: "/",
-                        reload: true
-                    });
+                    $timeout(function () {
+                        vm.disSubmit = false;
+                        $rootScope.$state.go("fileList",{}, {
+                            reload: true
+                        });
+                    },200);//不清楚为什么隐藏不了,需要定时
                 } else {
                     change_captcha();
                     vm.has_error = "has-error";
@@ -175,7 +175,7 @@ define(['angular',"app/cddService"], function(angular) {
         function need_captcha() {
             cddService.need_captcha($cookies.clouddisk_account).success(function (data, status) {
                 if (data) {//需要验证码
-                    $("#exampleModal").modal();//显示输入验证码对话框
+                    $("#exampleModal").modal("show");//显示输入验证码对话框
                     cddCaptchaData.url = cddCaptchaData.path();
                 }
             });

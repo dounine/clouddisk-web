@@ -21,4 +21,5 @@ public class IndexAction {
     public ModelAndView index() {
         return  new ModelAndView("redirect:admin");
     }
+
 }
