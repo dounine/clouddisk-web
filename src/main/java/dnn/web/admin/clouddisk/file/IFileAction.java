@@ -20,7 +20,7 @@ public interface IFileAction {
     FileList list(FileListParameter fileListParameter);
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
-    FileSearch search(@RequestParam(value = "path") String key, FileSearchParameter fileSearchParameter);
+    FileSearch search(@RequestParam(value = "path",defaultValue = "/") String key, FileSearchParameter fileSearchParameter);
 
     @RequestMapping(value = "readImgStream", method = RequestMethod.GET)
     void readImgStream(HttpServletRequest request, HttpServletResponse response);

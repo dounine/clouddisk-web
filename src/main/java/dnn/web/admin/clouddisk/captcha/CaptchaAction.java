@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -33,10 +32,17 @@ public class CaptchaAction {
 		ResponseText responseText = new ResponseText();
 		responseText.setSuccess(false);
 		CaptchaThreadValidator.validCaptchaValidator(account, captchaValidator);
-		boolean appRun = true;
-		while(appRun){
+		boolean appRun = true,tout=true;
+		int scount = 0;
+		while(appRun&&tout){
 			try {
-				Thread.sleep(100);//轮循查询登录响应内容
+				Thread.sleep(200);//轮循查询登录响应内容
+				scount+=1;
+				if(scount>=30){
+					responseText.setMsg("登录超时");
+					responseText.setSuccess(false);
+					tout = false;
+				}
 				CaptchaValidator cv = CaptchaThreadValidator.getCaptchaValidator(account);
 				if(StringUtils.isNotBlank(cv.getValidMsg())){//登录信息不为空,证明线程处理完毕
 					responseText.setMsg(cv.getValidMsg());

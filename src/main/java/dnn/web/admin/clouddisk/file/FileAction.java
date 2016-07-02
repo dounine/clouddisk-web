@@ -21,7 +21,6 @@ import org.apache.log4j.lf5.util.StreamUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +41,7 @@ public class FileAction implements IFileAction {
     }
 
     @Override
-    public FileSearch search(@RequestParam(value = "path") String key, FileSearchParameter fileSearchParameter) {
+    public FileSearch search(String key, FileSearchParameter fileSearchParameter) {
         fileSearchParameter.setKey(key);
         FileSearchParser fileSearchParser = new FileSearchParser(ClouddiskAction.LOGIN_USER_TOKEN);
         return fileSearchParser.parse(fileSearchParameter);
