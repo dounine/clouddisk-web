@@ -5,7 +5,7 @@
 * 安装依赖的环境
   * 安装 `npm`
   * 下载所需要的环境
-    * 在项目根目录执行 `npm bash` 命令: `npm install`
+    * 在项目根目录执行bash命令: `npm install`
     * 继续执行 `bower bash` 命令: `bower install`
     * 执行 `grunt` 命令: `grunt begin`
   * 打包发布: `mvn clean package`
