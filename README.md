@@ -20,6 +20,7 @@ CloudDisk 使用说明
         * `account` : 360云盘帐号
         * `password` : 帐号密码
         * `md5` : 是否是md5加密(使用 `com.dounine.clouddisk360.util.MD5Util.MD5` 方法进行加载)
+      * 修改`public/js/app.js`中的`$cookies.clouddisk_account = "102535481@qq.com";`为你登录的对应帐号
       * 构造参数:
         * `LoginUserToken(String account, String password)`
           * `account` : 云盘帐号
