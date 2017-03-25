@@ -11,7 +11,6 @@
 	</head>
 	<body ng-app="dnnApp" class="container" ctx="${ctx}">
 		<div ui-view></div>
-		<script></script>
 		<script src="${ctx}/public/js/lib/requirejs/require.js"></script>
 		<script>
 			require(['${ctx}/public/js/main.js?______t='+new Date().getTime()]);
